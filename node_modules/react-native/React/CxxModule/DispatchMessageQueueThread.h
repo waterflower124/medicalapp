@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <glog/logging.h>
-
 #include <React/RCTLog.h>
 #include <cxxreact/MessageQueueThread.h>
 
@@ -30,7 +28,7 @@ public:
       dispatch_async(queue, block);
     }
   }
-  void runOnQueueSync(std::function<void()>&& __unused func) override {
+  void runOnQueueSync(std::function<void()>&& func) override {
     LOG(FATAL) << "Unsupported operation";
   }
   void quitSynchronous() override {

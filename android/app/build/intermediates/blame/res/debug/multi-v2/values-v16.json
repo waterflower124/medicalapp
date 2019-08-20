@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/b1abd11d4d46846bf86e7a48dee401f7/res/values-v16/values-v16.xml",
+                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/3566dd3907da55f3eb04f3909446c7c3/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/367e75346d3b952d75708df59a761ccb/res/values-v16/values-v16.xml",
+                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/e5091133a0e701bf630e9c9b19fadff2/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

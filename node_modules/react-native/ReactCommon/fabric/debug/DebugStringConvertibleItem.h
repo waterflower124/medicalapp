@@ -21,6 +21,7 @@ namespace react {
 // in custom implementations of `getDebugChildren` and `getDebugProps`.
 class DebugStringConvertibleItem : public DebugStringConvertible {
  public:
+  DebugStringConvertibleItem() = default;
   DebugStringConvertibleItem(const DebugStringConvertibleItem &item) = default;
 
   DebugStringConvertibleItem(

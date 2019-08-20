@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "/Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/b1abd11d4d46846bf86e7a48dee401f7/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "/Users/WF/.gradle/caches/transforms-2/files-2.1/3566dd3907da55f3eb04f3909446c7c3/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

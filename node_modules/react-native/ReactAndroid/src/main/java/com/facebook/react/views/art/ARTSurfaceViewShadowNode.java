@@ -16,7 +16,6 @@ import android.view.Surface;
 import android.graphics.PorterDuff;
 import android.graphics.SurfaceTexture;
 import android.view.TextureView;
-import android.os.Build;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.common.ReactConstants;
@@ -24,15 +23,13 @@ import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.UIViewOperationQueue;
 import com.facebook.react.uimanager.ReactShadowNode;
 import com.facebook.react.uimanager.ViewProps;
-import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.bridge.LifecycleEventListener;
 
 /**
  * Shadow node for ART virtual tree root - ARTSurfaceView
  */
 public class ARTSurfaceViewShadowNode extends LayoutShadowNode
-  implements TextureView.SurfaceTextureListener, LifecycleEventListener {
+  implements TextureView.SurfaceTextureListener {
 
   private @Nullable Surface mSurface;
 
@@ -57,11 +54,11 @@ public class ARTSurfaceViewShadowNode extends LayoutShadowNode
   @Override
   public void onCollectExtraUpdates(UIViewOperationQueue uiUpdater) {
     super.onCollectExtraUpdates(uiUpdater);
-    drawOutput(false);
+    drawOutput();
     uiUpdater.enqueueUpdateExtraData(getReactTag(), this);
   }
 
-  private void drawOutput(boolean markAsUpdated) {
+  private void drawOutput() {
     if (mSurface == null || !mSurface.isValid()) {
       markChildrenUpdatesSeen(this);
       return;
@@ -78,28 +75,16 @@ public class ARTSurfaceViewShadowNode extends LayoutShadowNode
       for (int i = 0; i < getChildCount(); i++) {
         ARTVirtualNode child = (ARTVirtualNode) getChildAt(i);
         child.draw(canvas, paint, 1f);
-        if (markAsUpdated) {
-          child.markUpdated();
-        } else {
-          child.markUpdateSeen();
-        }
+        child.markUpdateSeen();
       }
 
       if (mSurface == null) {
         return;
       }
+
       mSurface.unlockCanvasAndPost(canvas);
     } catch (IllegalArgumentException | IllegalStateException e) {
       FLog.e(ReactConstants.TAG, e.getClass().getSimpleName() + " in Surface.unlockCanvasAndPost");
-    }
-  }
-
-  public void setupSurfaceTextureListener(ARTSurfaceView surfaceView) {
-    SurfaceTexture surface = surfaceView.getSurfaceTexture();
-    surfaceView.setSurfaceTextureListener(this);
-    if (surface != null && mSurface == null) {
-      mSurface = new Surface(surface);
-      drawOutput(true);
     }
   }
 
@@ -112,41 +97,14 @@ public class ARTSurfaceViewShadowNode extends LayoutShadowNode
   }
 
   @Override
-  public void setThemedContext(ThemedReactContext themedContext) {
-    super.setThemedContext(themedContext);
-    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-      themedContext.addLifecycleEventListener(this);
-    }
-  }
-
-  @Override
-  public void dispose() {
-    super.dispose();
-    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-      getThemedContext().removeLifecycleEventListener(this);
-    }
-  }
-
-  @Override
-  public void onHostResume() {
-    drawOutput(false);
-  }
-
-  @Override
-  public void onHostPause() {}
-
-  @Override
-  public void onHostDestroy() {}
-
-  @Override
   public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
     mSurface = new Surface(surface);
-    drawOutput(false);
+    drawOutput();
   }
 
   @Override
   public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-    mSurface.release();
+    surface.release();
     mSurface = null;
     return true;
   }

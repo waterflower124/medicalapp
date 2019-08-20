@@ -1,0 +1,21 @@
+dependencies: \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/node_modules/react-native/Libraries/Image/RCTImageShadowView.m \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/node_modules/react-native/Libraries/Image/RCTImageShadowView.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTLayout.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/yoga/YGValue.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/ios/build/cashcard/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h

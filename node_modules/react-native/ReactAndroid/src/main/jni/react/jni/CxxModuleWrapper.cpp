@@ -5,8 +5,6 @@
 
 #include "CxxModuleWrapper.h"
 
-#include <glog/logging.h>
-
 #include <folly/ScopeGuard.h>
 
 #include <dlfcn.h>

@@ -5,8 +5,6 @@
 
 #include "jsireact/JSINativeModules.h"
 
-#include <glog/logging.h>
-
 #include <cxxreact/ReactMarker.h>
 
 #include <jsi/JSIDynamic.h>

@@ -1,4 +1,4 @@
-#Sun Aug 11 02:44:24 CST 2019
-base.0=/Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/android/app/build/intermediates/transforms/dexMerger/debug/4
+#Fri Jul 26 10:48:02 CST 2019
+base.0=/Volumes/DataDrive/Project/2019/6.27_china_react_native/cashcard/android/app/build/intermediates/transforms/dexMerger/debug/4
 path.0=classes.dex
 renamed.0=classes.dex

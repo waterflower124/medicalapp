@@ -181,17 +181,17 @@
     [_tableView reloadData];
 }
 
-- (NSInteger)tableView:(__unused UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[_extraData objectAtIndex:section] count];
 }
 
-- (CGFloat)tableView:(__unused UITableView *)tableView heightForHeaderInSection:(__unused NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 40;
 }
 
-- (UIView *)tableView:(__unused UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
@@ -237,7 +237,7 @@
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(__unused UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _extraDataTitle.count;
 }

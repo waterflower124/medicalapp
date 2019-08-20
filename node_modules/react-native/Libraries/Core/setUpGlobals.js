@@ -21,10 +21,6 @@ if (global.window === undefined) {
   global.window = global;
 }
 
-if (global.self === undefined) {
-  global.self = global;
-}
-
 // Set up process
 global.process = global.process || {};
 global.process.env = global.process.env || {};

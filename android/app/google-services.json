@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "36209462086",
+    "firebase_url": "https://wichz-discount.firebaseio.com",
+    "project_id": "wichz-discount",
+    "storage_bucket": "wichz-discount.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36209462086:android:52d3c4e00be2c971",
+        "android_client_info": {
+          "package_name": "com.wichz.discount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36209462086-g1chlpvup4dunom26mp35pq7pdc47jmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wichz.discount",
+            "certificate_hash": "51c186a542141eb69d4ff2c2e0de0ebc37b9dd77"
+          }
+        },
+        {
+          "client_id": "36209462086-i4pp97rre8kkmrel6qseuqn2qaookhef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7v3ANhMM0MP61vb0Eq5btS8iDT9OG0ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36209462086-u02m4qmltchgk72ae3lpmmgvcf42qrqu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36209462086-qrg9ld4mr3d67voaal5mp8nvgjlr5i1q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wichz.discount"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

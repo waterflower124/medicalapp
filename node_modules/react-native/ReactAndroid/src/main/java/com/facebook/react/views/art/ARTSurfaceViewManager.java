@@ -60,8 +60,7 @@ public class ARTSurfaceViewManager extends
 
   @Override
   public void updateExtraData(ARTSurfaceView root, Object extraData) {
-    ARTSurfaceViewShadowNode shadowNode = (ARTSurfaceViewShadowNode) extraData;
-    shadowNode.setupSurfaceTextureListener(root);
+    root.setSurfaceTextureListener((ARTSurfaceViewShadowNode) extraData);
   }
 
   @Override
