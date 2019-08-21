@@ -1,34 +1,29 @@
 
 export default {
-    MAPAPIKEY: "AIzaSyDUNFhK6gsWN2V-A5E69R5e7vXQhLExrFw",
-    base_url: "http://wichz.com/api/",
-    user_token: '',
-    selectedLat: 0.0,
-    selectedLng: 0.0,
-
+    base_url: 'http://luis1.herokuapp.com',
+    // base_url:"http://swivli.com",
+    update_account: false,
+    user_name: '',
     email: '',
-    first_name: '',
-    last_name: '',
-    username: '',
-    avatar_url: '',
-    created_at: 0,
-    user_loc_lat: 0.0,
-    user_loc_lng: 0.0,
-    user_current_address: '',
-    acc_tmp_lat: 0.0,
-    acc_tmp_lng: 0.0,
+    password: '',
+    userCode: '',
+    advocate_userid: '',
+    signup_id: 0,
+    mother: '',
 
-    discounts_likes_list: [],
-    cards_likes_list: [],
+    edit_case_json: null,
+    visitStatus: '',
+    editcase_page_title: 'Visit Master',
+    procedure_selected_top_tab: 'Procedure',
 
-    category_list: [],
-    search_hotkeys: [],
-    search_word: '',
-    selected_discount: {},
-    previou_of_detail: '',
+    icd_admin_json: null,
+    icd_admin_page_title: "Icd Master",
 
-    bank_list: [],
-    selected_card: {},
+    lab_admin_json: null,
 
-    selected_notification: {},
+    symptom_admin_json: null,
+
+    cpt_admin_json: null,
+    cpt_admin_page_title: "CptMaster",
+
 }
