@@ -508,7 +508,7 @@ export default class PendingVisit extends Component {
                                 <View style = {styles.item_text_view}>
                                     <Text style = {styles.item_text}>{item.doctorName}</Text>
                                 </View>
-                                <View style = {styles.item_icon_view}>
+                                <TouchableOpacity style = {styles.item_icon_view} onPress = {() => this.select_right_menu(index)}>
                                 {
                                     item.visitType == "M" &&
                                     <View style = {[styles.circle_view, {backgroundColor: '#ff0000'}]} >
@@ -545,7 +545,7 @@ export default class PendingVisit extends Component {
                                         <Text style = {{fontSize: 16, color: '#ffffff'}}>{item.visitType}</Text>
                                     </View>
                                 }
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
                         )
