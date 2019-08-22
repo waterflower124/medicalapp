@@ -173,24 +173,25 @@ export default class Home extends Component {
     }
 
     animate_side_menu(target_screen) {
-        if(Global.mother == "Y") {
-            var toValue = deviceWidth * 0.8;
-            if(this.state.side_menu_show) {
-                toValue = -deviceWidth * 0.8;
-            };
-            this.setState({
-                side_menu_show: !this.state.side_menu_show
-            })
-            Animated.timing(
-                this.state.coord_x,
-                {
-                    toValue: toValue,
-                    velocity: 3,
-                    tension: 2,
-                    friction: 8,
-                }
-            ).start();
-            if(target_screen == "Icd 10 Admin") {
+        
+        var toValue = deviceWidth * 0.8;
+        if(this.state.side_menu_show) {
+            toValue = -deviceWidth * 0.8;
+        };
+        this.setState({
+            side_menu_show: !this.state.side_menu_show
+        })
+        Animated.timing(
+            this.state.coord_x,
+            {
+                toValue: toValue,
+                velocity: 3,
+                tension: 2,
+                friction: 8,
+            }
+        ).start();
+        if(target_screen == "Icd 10 Admin") {
+            if(Global.mother == "Y") {
                 Global.icd_admin_json = {
                     "diagnoseAlias": "",
                     "diagnoseCode": "",
@@ -205,7 +206,11 @@ export default class Home extends Component {
                     "symptoms": []
                 };
                 this.props.navigation.navigate("ICDCode");
-            } else if(target_screen == "Lab Admin") {
+            } else {
+                Alert.alert("EpatientIndex", "Only certified users have access to admin modules. If you are interested in collaborating please send email to nerysrosa2003@gmail.com.")
+            }
+        } else if(target_screen == "Lab Admin") {
+            if(Global.mother == "Y") {
                 Global.lab_admin_json = {
                     "bestAlias":"",
                     "id":0,
@@ -216,7 +221,11 @@ export default class Home extends Component {
                     "userName":""
                 };
                 this.props.navigation.navigate("LabMaster");
-            } else if(target_screen == "Symptom Admin") {
+            } else {
+                Alert.alert("EpatientIndex", "Only certified users have access to admin modules. If you are interested in collaborating please send email to nerysrosa2003@gmail.com.")
+            }
+        } else if(target_screen == "Symptom Admin") {
+            if(Global.mother == "Y") {
                 Global.symptom_admin_json = {
                     "id": 0,
                     "symptomAlias": "",
@@ -224,7 +233,11 @@ export default class Home extends Component {
                     "symptomDesc": ""
                 };
                 this.props.navigation.navigate("SymptomMaster");
-            } else if(target_screen == "Cpt Admin") {
+            } else {
+                Alert.alert("EpatientIndex", "Only certified users have access to admin modules. If you are interested in collaborating please send email to nerysrosa2003@gmail.com.")
+            }
+        } else if(target_screen == "Cpt Admin") {
+            if(Global.mother == "Y") {
                 Global.cpt_admin_json = {
                     "id": 0,
                     "medproc": {
@@ -241,10 +254,10 @@ export default class Home extends Component {
                     "surgeryRisk": []
                 };
                 this.props.navigation.navigate("CptMaster");
-            } 
-        } else {
-            Alert.alert("EpatientIndex", "Only certified users have access to admin modules. If you are interested in collaborating please send email to nerysrosa2003@gmail.com.")
-        }
+            } else {
+                Alert.alert("EpatientIndex", "Only certified users have access to admin modules. If you are interested in collaborating please send email to nerysrosa2003@gmail.com.")
+            }
+        } 
     }
 
 

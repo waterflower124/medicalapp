@@ -45,7 +45,6 @@ export default class WorkerSignup extends Component {
 
             showIndicator: false,
             user_name: '',
-            email: '',
             password: '',
             advocate_userid: '',
             confim_password: '',
@@ -71,7 +70,6 @@ export default class WorkerSignup extends Component {
         if(this.state.update_account) {
             this.setState({
                 user_name: Global.user_name,
-                email: Global.email,
                 password: Global.password,
                 advocate_userid: '',
                 userCode: Global.userCode,
@@ -109,7 +107,6 @@ export default class WorkerSignup extends Component {
                     'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
                 },
                 body: JSON.stringify({
-                    email: this.state.email,
                     userName: this.state.user_name,
                     father: this.state.advocate_userid,
                     password: this.state.password,
@@ -162,7 +159,6 @@ export default class WorkerSignup extends Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: this.state.email,
                     userName: this.state.user_name,
                     father: this.state.advocate_userid,
                     password: this.state.password,
@@ -231,11 +227,18 @@ export default class WorkerSignup extends Component {
                     <Image style = {{width: '60%', height: '60%'}} resizeMode = {'contain'} source={require('../assets/images/logo.png')}/>
                 </View>
                 <View style = {styles.medium_view}>
-                        <View style = {styles.input_view}>
+                        {/* <View style = {styles.input_view}>
                             <TextInput style = {styles.input_text} placeholder = {'Email'} autoCapitalize={false} onChangeText = {(text) => this.setState({email: text})}>{this.state.email}</TextInput>
-                        </View>
+                        </View> */}
                         <View style = {styles.input_view}>
+                        {
+                            this.state.update_account &&
+                            <TextInput style = {styles.input_text} editable={false} placeholder = {'Username'} autoCapitalize={false} onChangeText = {(text) => this.setState({user_name: text})}>{this.state.user_name}</TextInput>
+                        }
+                        {
+                            !this.state.update_account &&
                             <TextInput style = {styles.input_text} placeholder = {'Username'} autoCapitalize={false} onChangeText = {(text) => this.setState({user_name: text})}>{this.state.user_name}</TextInput>
+                        }
                         </View>
                         <View style = {styles.input_view}>
                             <TextInput style = {styles.input_text} placeholder = {'Advocate User ID'} autoCapitalize={false} onChangeText = {(text) => this.setState({advocate_userid: text})}>{this.state.advocate_userid}</TextInput>
