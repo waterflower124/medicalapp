@@ -293,11 +293,9 @@ export default class PendingVisit extends Component {
             } else if(this.state.prev_screen == "OpenCase") {
                 item.src_type = "OpenCase";
             }
-            if(this.state.prev_screen != "Home") {
-                Global.edit_case_json = item;
-                Global.visitStatus = this.state.visitStatus;
-                this.props.navigation.navigate("VisitMaster");
-            }
+            Global.edit_case_json = item;
+            Global.visitStatus = this.state.visitStatus;
+            this.props.navigation.navigate("VisitMaster");
         }
     }
 
