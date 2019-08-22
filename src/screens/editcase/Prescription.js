@@ -259,7 +259,7 @@ export default class Prescription extends Component {
                             </View>
                             <View style = {{width: '10%', alignItems: 'flex-end', marginRight: 10}}>
                                 <TouchableOpacity onPress = {() => this.select_right_menu(index)}>
-                                    <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../../assets/images/pending_lab_menu_right.png')}/>
+                                    <Image style = {{width: 30, height: 20}} resizeMode = {'contain'} source={require('../../assets/images/pending_lab_menu_right.png')}/>
                                 </TouchableOpacity>
                             </View>
                         </View>

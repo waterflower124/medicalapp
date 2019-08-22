@@ -134,6 +134,48 @@ export default class PendingVisit extends Component {
                 zIndex: 1000
             }
         } else {
+            if(this.state.json_array[this.state.selected_right_menu_index].visitType == "M") {
+                return {
+                    width: 150,
+                    height: 100,
+                    position: 'absolute',
+                    top: top_pos,
+                    right: 0,
+                    borderWidth: 1,
+                    borderColor: '#c0c0c0',
+                    backgroundColor: '#ffffff',
+                    paddingLeft: 10,
+                    zIndex: 1000
+                }
+            }
+            if(this.state.json_array[this.state.selected_right_menu_index].visitType == "I") {
+                return {
+                    width: 150,
+                    height: 150,
+                    position: 'absolute',
+                    top: top_pos,
+                    right: 0,
+                    borderWidth: 1,
+                    borderColor: '#c0c0c0',
+                    backgroundColor: '#ffffff',
+                    paddingLeft: 10,
+                    zIndex: 1000
+                }
+            }
+            if(this.state.json_array[this.state.selected_right_menu_index].visitType == "P") {
+                return {
+                    width: 150,
+                    height: 50,
+                    position: 'absolute',
+                    top: top_pos,
+                    right: 0,
+                    borderWidth: 1,
+                    borderColor: '#c0c0c0',
+                    backgroundColor: '#ffffff',
+                    paddingLeft: 10,
+                    zIndex: 1000
+                }
+            }
             return {
                 width: 150,
                 height: 200,
@@ -176,16 +218,11 @@ export default class PendingVisit extends Component {
             json_array: json_array,
             right_menu_clicked: false,
             add_new_button_click: false,
-            selected_right_menu_index: -1
         });
     }
 
     delete_alert = async() => {
-        var json_array = this.state.json_array;
-        json_array[index].clicked = !json_array[index].clicked;
-        this.setState({
-            json_array: json_array
-        });
+        this.hidden_right_menu();
         Alert.alert('Notice!', 'Do you really delete this item?',
         [
             {text: 'Cancel', onPress: null},
@@ -218,9 +255,6 @@ export default class PendingVisit extends Component {
             Alert.alert('Warning!', "Network error");
         });
         this.setState({showIndicator: false})
-        this.setState({
-            selected_right_menu_index: -1
-        });
     }
 
     visit_master = (item) => {
@@ -259,9 +293,11 @@ export default class PendingVisit extends Component {
             } else if(this.state.prev_screen == "OpenCase") {
                 item.src_type = "OpenCase";
             }
-            Global.edit_case_json = item;
-            Global.visitStatus = this.state.visitStatus;
-            this.props.navigation.navigate("VisitMaster");
+            if(this.state.prev_screen != "Home") {
+                Global.edit_case_json = item;
+                Global.visitStatus = this.state.visitStatus;
+                this.props.navigation.navigate("VisitMaster");
+            }
         }
     }
 
@@ -361,10 +397,62 @@ export default class PendingVisit extends Component {
 
     donotuseopinion = async() => {
         this.hidden_right_menu();
+        var item = this.state.json_array[this.state.selected_right_menu_index];
+        if(this.state.json_array[this.state.selected_right_menu_index].visitType == "I") {
+            item.visitType = "S";
+        } else if(this.state.json_array[this.state.selected_right_menu_index].visitType == "S") {
+            item.visitType = "I";
+        }
+        
+        this.setState({showIndicator: true})
+        await fetch(Global.base_url + '/visitproxy/' + item.id, {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
+            },
+            body: JSON.stringify(item)
+        })
+        .then(async data => {
+            // var json_array = this.state.json_array;
+            // json_array.splice(index, 1);
+            // this.setState({
+            //     json_array: json_array
+            // });
+            await this.init_visit();
+        })
+        .catch(function(error) {
+            Alert.alert('Warning!', "Network error");
+        });
+        this.setState({showIndicator: false})
     }
 
     setasmaindoctor = async() => {
         this.hidden_right_menu();
+        var item = this.state.json_array[this.state.selected_right_menu_index];
+        item.visitType = "M";
+        this.setState({showIndicator: true})
+        await fetch(Global.base_url + '/visitproxy/' + item.id, {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
+            },
+            body: JSON.stringify(item)
+        })
+        .then(async data => {
+            // var json_array = this.state.json_array;
+            // json_array.splice(index, 1);
+            // this.setState({
+            //     json_array: json_array
+            // });
+            await this.init_visit();
+        })
+        .catch(function(error) {
+            Alert.alert('Warning!', "Network error");
+        });
+        this.setState({showIndicator: false})
+
     }
 
     recordping = async() => {
@@ -412,7 +500,7 @@ export default class PendingVisit extends Component {
                                 </View>
                                 <View style = {styles.item_icon_view}>
                                     <TouchableOpacity onPress = {() => this.select_right_menu(index)}>
-                                        <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../assets/images/pending_lab_menu_right.png')}/>
+                                        <Image style = {{width: 30, height: 20}} resizeMode = {'contain'} source={require('../assets/images/pending_lab_menu_right.png')}/>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -469,14 +557,20 @@ export default class PendingVisit extends Component {
                                 <Text style = {styles.right_menu_text}>Delete</Text>
                             </TouchableOpacity>
                         {
-                            this.state.prev_screen != "Home" && this.state.prev_screen != "CloseCase" &&
+                            this.state.prev_screen != "Home" && this.state.prev_screen != "CloseCase" && this.state.json_array[this.state.selected_right_menu_index].visitType != "P" &&
                             <View>
+                            {
+                                this.state.json_array[this.state.selected_right_menu_index].visitType != "M" && 
                                 <TouchableOpacity style = {styles.right_menu_item_view} onPress = {() => this.donotuseopinion()}>
-                                    <Text style = {styles.right_menu_text}>Do not use opinion</Text>
+                                    <Text style = {styles.right_menu_text}>{this.state.json_array[this.state.selected_right_menu_index].visitType != "I" ? "Do not use opinion" : "Use opinion"}</Text>
                                 </TouchableOpacity>
+                            }
+                            {
+                                this.state.json_array[this.state.selected_right_menu_index].visitType != "M" && this.state.json_array[this.state.selected_right_menu_index].visitType != "I" &&
                                 <TouchableOpacity style = {styles.right_menu_item_view} onPress = {() => this.setasmaindoctor()}>
                                     <Text style = {styles.right_menu_text}>Set as main doctor</Text>
                                 </TouchableOpacity>
+                            }
                                 <TouchableOpacity style = {styles.right_menu_item_view} onPress = {() => this.recordping()}>
                                     <Text style = {styles.right_menu_text}>Record Ping</Text>
                                 </TouchableOpacity>

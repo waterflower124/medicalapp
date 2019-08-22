@@ -74,7 +74,6 @@ export default class Splash extends Component {
                             Global.user_name = user_name;
                             Global.password = password;
                             Global.mother = data.mother;
-                            Global.email = data.email;
                             Global.userCode = data.userCode;
                             Global.advocate_userid = data.father;
                             Global.signup_id = data.id;

@@ -66,8 +66,8 @@ export default class VisitMaster extends Component {
             doctorName: '',
             specialty: '',
             comments: '',
-            paperRec: Global.edit_case_json.paperRec,
-            onlineRec: Global.edit_case_json.onlineRec
+            paperRec: '',
+            onlineRec: ''
 
 
 
@@ -94,6 +94,8 @@ export default class VisitMaster extends Component {
             doctorName: Global.edit_case_json.doctorName,
             specialty: Global.edit_case_json.specialty,
             comments: Global.edit_case_json.comments,
+            paperRec: Global.edit_case_json.paperRec,
+            onlineRec: Global.edit_case_json.onlineRec
         });
     }
 
@@ -184,6 +186,25 @@ export default class VisitMaster extends Component {
         Global.edit_case_json.comments = text;
     }
 
+    erase_case = async() => {
+        this.setState({
+            nextVisitDate_string: '',
+            hospitalName: '',
+            doctorName: '',
+            specialty: '',
+            paperRec: 'N',
+            onlineRec: 'N',
+            comments: ''
+        });
+        Global.edit_case_json.nextVisitDate = "";
+        Global.edit_case_json.hospitalName = "";
+        Global.edit_case_json.doctorName = "";
+        Global.edit_case_json.specialty = "";
+        Global.edit_case_json.comments = "";
+        Global.edit_case_json.paperRec = "N";
+        Global.edit_case_json.onlineRec = "N";
+    }
+
     save_case = async() => {
         if(Global.edit_case_json.visitDate == "" || Global.edit_case_json.visitDate == null || 
             Global.edit_case_json.hospitalName == "" || Global.edit_case_json.hospitalName == null 
@@ -235,6 +256,9 @@ export default class VisitMaster extends Component {
                     <Text style = {{fontSize: 18, color: '#ffffff'}}>{this.state.page_title}</Text>
                 </View>
                 <View style = {{width: '40%', height: '100%', justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row'}}>
+                    <TouchableOpacity style = {{marginRight: 15}} onPress = {() => this.erase_case()}>
+                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/erase.png')}/>
+                    </TouchableOpacity>
                     <TouchableOpacity style = {{marginRight: 15}} onPress = {() => this.save_case()}>
                         <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/save_newcase.png')}/>
                     </TouchableOpacity>

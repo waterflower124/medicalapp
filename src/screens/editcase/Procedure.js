@@ -87,7 +87,6 @@ export default class Procedure extends Component {
             procCode: Global.edit_case_json.procCode,
             procAlias: Global.edit_case_json.procAlias,
             successRate: Global.edit_case_json.successRate,
-
             procComments: Global.edit_case_json.procComments,
         })
     }
@@ -171,9 +170,30 @@ export default class Procedure extends Component {
 
     set_comments(text) {
         this.setState({
-            comments: text
+            procComments: text
         })
         Global.edit_case_json.procComments = text;
+    }
+
+    erase_case() {
+        this.setState({
+            procDate_string: "",
+            procName: "",
+            procCode: "",
+            procAlias: "",
+            successRate: "0",
+            procComments: "",
+        });
+        Global.edit_case_json.procDate = "";
+        Global.edit_case_json.procName = "";
+        Global.edit_case_json.procCode = "";
+        Global.edit_case_json.procAlias = "";
+        Global.edit_case_json.successRate = "0";
+        Global.edit_case_json.procComments = "";
+        Global.edit_case_json.alternatives = [];
+        Global.edit_case_json.instructions = [];
+        Global.edit_case_json.risks = [];
+        Global.edit_case_json.prodiags = [];
     }
 
     save_case = async() => {
@@ -228,6 +248,9 @@ export default class Procedure extends Component {
                     <Text style = {{fontSize: 18, color: '#ffffff'}}>{this.state.page_title}</Text>
                 </View>
                 <View style = {{width: '40%', height: '100%', justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row'}}>
+                    <TouchableOpacity style = {{marginRight: 15}} onPress = {() => this.erase_case()}>
+                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/erase.png')}/>
+                    </TouchableOpacity>
                     <TouchableOpacity style = {{marginRight: 15}} onPress = {() => this.save_case()}>
                         <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/save_newcase.png')}/>
                     </TouchableOpacity>

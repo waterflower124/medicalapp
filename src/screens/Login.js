@@ -90,7 +90,6 @@ export default class Login extends Component {
                 Global.user_name = this.state.user_name;
                 Global.password = this.state.password;
                 Global.mother = data.mother;
-                Global.email = data.email;
                 Global.userCode = data.userCode;
                 Global.advocate_userid = data.father;
                 Global.signup_id = data.id;

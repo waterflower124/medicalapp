@@ -74,9 +74,33 @@ export default class SelectProcedureName extends Component {
 
     async select_procedure_name(item) {
         if(this.state.prev_screen == "Procedure") {
-            this.props.navigation.navigate("Procedure");
             Global.edit_case_json.procName = item.procDesc;
             Global.edit_case_json.procCode = item.procCode;
+
+            this.setState({showIndicator: true});
+            await fetch(Global.base_url + "/surgeryproxy/" + item.id, {
+                method: "GET",
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
+                },
+                
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(async data => {
+                Global.edit_case_json.alternatives = data.surgeryAlt;
+                Global.edit_case_json.instructions = data.surgeryInst;
+                Global.edit_case_json.risks = data.surgeryRisk;
+            })
+            .catch(function(error) {
+                Alert.alert('Warning!', "Network error");
+            });
+            this.setState({showIndicator: false});
+
+            this.props.navigation.navigate("Procedure");
+            
         } else {
             Global.cpt_admin_json.id = item.id;
             Global.cpt_admin_json.medproc.id = item.id;

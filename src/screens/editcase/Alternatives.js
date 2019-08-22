@@ -198,7 +198,6 @@ export default class Alternatives extends Component {
             return response.json();
         })
         .then(async data => {
-            console.warn(data)
             Global.editcase_page_title = "Visit Master";
             Global.procedure_selected_top_tab = "Procedure";
             this.props.navigation.navigate("PendingVisit");
@@ -272,7 +271,7 @@ export default class Alternatives extends Component {
                             </View>
                             <View style = {{width: '10%', alignItems: 'flex-end', marginRight: 10}}>
                                 <TouchableOpacity onPress = {() => this.select_right_menu(index)}>
-                                    <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../../assets/images/pending_lab_menu_right.png')}/>
+                                    <Image style = {{width: 30, height: 20}} resizeMode = {'contain'} source={require('../../assets/images/pending_lab_menu_right.png')}/>
                                 </TouchableOpacity>
                             </View>
                             {

@@ -4,7 +4,6 @@ export default {
     // base_url:"http://swivli.com",
     update_account: false,
     user_name: '',
-    email: '',
     password: '',
     userCode: '',
     advocate_userid: '',

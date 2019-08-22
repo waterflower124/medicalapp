@@ -239,7 +239,7 @@ export default class Diagnosis extends Component {
                                                         <Text style = {[styles.item_text, {color: '#ff0000'}]}>{sub_item.symptomDesc}</Text>
                                                     </View>
                                                     <View style = {{width: '10%', justifyContent: 'center', alignItems: 'center'}}>
-                                                        <View style = {[styles.badge_view, sub_item.symptomStatus == "P" ? {backgroundColor: '#0000ff'} : {backgroundColor: '#000000'}]}>
+                                                        <View style = {[styles.badge_view, sub_item.symptomStatus == "Y" ? {backgroundColor: '#ff0000'} : {backgroundColor: '#000000'}]}>
                                                             <Text style = {styles.badge_text}>{sub_item.symptomStatus.toUpperCase().charAt(0)}</Text>
                                                         </View>
                                                     </View>
