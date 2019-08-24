@@ -33,6 +33,7 @@ import Splash from "./src/screens/Splash"
 import Login from "./src/screens/Login"
 import Home from "./src/screens/Home"
 import WorkerSignup from "./src/screens/WorkerSignup"
+import AdvocateSignup from "./src/screens/AdvocateSignup"
 import ScoreFactors from "./src/screens/ScoreFactors"
 import Advice from "./src/screens/Advice"
 import Diagnosis from "./src/screens/Diagnosis"
@@ -80,11 +81,14 @@ import CptRisks from "./src/screens/cptadmin/CptRisks"
 import CptAlternatives from "./src/screens/cptadmin/CptAlternatives"
 import CptPostOP from "./src/screens/cptadmin/CptPostOP"
 
+import Advocate from "./src/screens/Advocate"
+
 const AppNavigator = createStackNavigator ({
   Splash: {screen: Splash},
   Login: {screen: Login},
   Home: {screen: Home},
   WorkerSignup: {screen: WorkerSignup},
+  AdvocateSignup: {screen: AdvocateSignup},
   ScoreFactors: {screen: ScoreFactors},
   Advice: {screen: Advice},
   Diagnosis: {screen: Diagnosis},
@@ -131,6 +135,8 @@ const AppNavigator = createStackNavigator ({
   CptRisks: {screen: CptRisks},
   CptAlternatives: {screen: CptAlternatives},
   CptPostOP: {screen: CptPostOP},
+
+  Advocate: {screen: Advocate},
   
 }, {
     transitionConfig: () => ({
