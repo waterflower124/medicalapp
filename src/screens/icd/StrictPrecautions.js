@@ -187,7 +187,8 @@ export default class StrictPrecaustions extends Component {
         });
         Global.icd_admin_json.notes = note_list;
         this.setState({
-            create_precaution_modal_show: false
+            create_precaution_modal_show: false,
+            new_precaution_desc: ''
         })
     }
 

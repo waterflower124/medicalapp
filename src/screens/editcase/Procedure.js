@@ -216,7 +216,6 @@ export default class Procedure extends Component {
             return response.json();
         })
         .then(async data => {
-            console.warn(data)
             Global.editcase_page_title = "Visit Master";
             Global.procedure_selected_top_tab = "Procedure";
             this.props.navigation.navigate("PendingVisit");

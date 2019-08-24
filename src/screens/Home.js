@@ -74,7 +74,7 @@ export default class Home extends Component {
             show_rightmenu: false
         })
         this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/dash/admin', {
+        await fetch(Global.base_url + '/dash/' + Global.user_name, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
@@ -139,14 +139,25 @@ export default class Home extends Component {
 
     my_account() {
         Global.update_account = true;
-        this.props.navigation.navigate("WorkerSignup");
+        if(Global.user_type == "advocate") {
+            this.props.navigation.navigate("AdvocateSignup");
+        } else {
+            this.props.navigation.navigate("WorkerSignup");
+        }
     }
 
     contactus() {
         this.setState({
             show_rightmenu: false
-        })
-        Linking.openURL('mailto:nerysrosa2003@gmail.com' )
+        });
+        Alert.alert("www.epatientindex.com", "Please email to support@epatientindex.com.",
+        [
+            {text: 'Cancel', onPress: null},
+            {text: 'OK', onPress: async() => {
+                Linking.openURL('mailto:support@epatientindex.com');
+            }}
+        ],
+        { cancelable: true })
     }
 
     terms_show() {
@@ -169,7 +180,6 @@ export default class Home extends Component {
             }}
         ],
         { cancelable: true })
-        
     }
 
     animate_side_menu(target_screen) {
@@ -260,6 +270,13 @@ export default class Home extends Component {
         } 
     }
 
+    chat_function() {
+        Alert.alert("EpatientIndex", "You can't use chat function. Please contact us.",
+        [
+            {text: 'OK', onPress: null}
+        ],
+        { cancelable: true })
+    }
 
     render() {
         if(this.state.showIndicator)
@@ -505,7 +522,7 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style = {{width: '100%', height: '30%', justifyContent: 'space-between', flexDirection: 'row'}}>
-                        <TouchableOpacity style = {styles.item_style}>
+                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.chat_function()}>
                         {
                             this.state.item_array[3].cantidad != 0 &&
                             <View style = {styles.badge_view}>
@@ -557,7 +574,7 @@ export default class Home extends Component {
                             <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_heart.png')}/>
                             <Text style = {styles.item_text}>Diagnosis</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style}>
+                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Advocate")}>
                         {
                             this.state.item_array[8].cantidad != 0 &&
                             <View style = {styles.badge_view}>

@@ -3,12 +3,23 @@ export default {
     base_url: 'http://luis1.herokuapp.com',
     // base_url:"http://swivli.com",
     update_account: false,
+
+    user_type: '',
+
     user_name: '',
     password: '',
     userCode: '',
     advocate_userid: '',
     signup_id: 0,
     mother: '',
+
+    father: '',
+    email: '',
+    paarea: '',
+    padesc: '',
+    paname: '',
+    phone: '',
+    paorg: '',
 
     edit_case_json: null,
     visitStatus: '',

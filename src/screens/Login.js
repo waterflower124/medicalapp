@@ -89,10 +89,24 @@ export default class Login extends Component {
             } else {
                 Global.user_name = this.state.user_name;
                 Global.password = this.state.password;
-                Global.mother = data.mother;
                 Global.userCode = data.userCode;
                 Global.advocate_userid = data.father;
                 Global.signup_id = data.id;
+                if(data.paname) {
+                    Global.father = data.father;
+                    Global.email = data.email;
+                    Global.paarea = data.paarea;
+                    Global.padesc = data.padesc;
+                    Global.paname = data.paname;
+                    Global.phone = data.phone;
+                    Global.paorg = data.paorg;
+
+                    Global.user_type = "advocate";
+                } else {
+                    Global.mother = data.mother;
+
+                    Global.user_type = "e-patient";
+                }
                 try {
                     await AsyncStorage.setItem("signin_status", "ok");
                     await AsyncStorage.setItem("user_name", this.state.user_name);
@@ -107,6 +121,17 @@ export default class Login extends Component {
             Alert.alert('Warning!', "Network error.");
         });
         this.setState({showIndicator: false})
+    }
+
+    forget_password() {
+        Alert.alert("www.epatientindex.com", "Please email to support@epatientindex.com.",
+        [
+            {text: 'Cancel', onPress: null},
+            {text: 'OK', onPress: async() => {
+                Linking.openURL('mailto:support@epatientindex.com');
+            }}
+        ],
+        { cancelable: true })
     }
 
     render() {
@@ -136,7 +161,7 @@ export default class Login extends Component {
                         </View>
                     </View>
                     <View style = {{width: '100%', height: '33%', justifyContent: 'center', alignItems: 'flex-end'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress = {() => this.forget_password()}>
                             <Text style = {styles.common_text}>Forgot Password?</Text>
                         </TouchableOpacity>
                     </View>
@@ -150,7 +175,7 @@ export default class Login extends Component {
                         <TouchableOpacity style = {[styles.button_view, {marginBottom: 5}]} onPress = {() => this.props.navigation.navigate("WorkerSignup")}>
                             <Text style = {styles.button_text}>CREATE E-PATIENT ACCOUNT</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {[styles.button_view, {marginTop: 5}]}>
+                        <TouchableOpacity style = {[styles.button_view, {marginTop: 5}]} onPress = {() => this.props.navigation.navigate("AdvocateSignup")}>
                             <Text style = {styles.button_text}>CREATE ADVOCATE ACCOUNT</Text>
                         </TouchableOpacity>
                     </View>

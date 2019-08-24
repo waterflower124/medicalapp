@@ -77,7 +77,7 @@ export default class OpenCase extends Component {
             });
         })
         .catch(function(error) {
-            Alert.alert('Warning!', error.message);
+            Alert.alert('Warning!', "Networl error.");
         });
         this.setState({showIndicator: false});
     }

@@ -23,6 +23,7 @@ import { SkypeIndicator } from 'react-native-indicators';
 import Global from '../utils/Global/Global'
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import RadioForm from '../utils/component/radiobutton/SimpleRadioButton'
 
 YellowBox.ignoreWarnings(["Warning:"]);
 
@@ -32,7 +33,12 @@ var menu_bar_height = 50;
 var safearea_height = deviceHeight - getInset('top') - getInset('bottom');
 var main_view_height = Platform.OS == "ios" ? safearea_height - menu_bar_height : safearea_height - menu_bar_height - StatusBar.currentHeight;
 
-export default class WorkerSignup extends Component {
+var radio_props = [
+    {label: 'Yes', value: 'YES' },
+    {label: 'No', value: 'NO' }
+];
+
+export default class AdvocateSignup extends Component {
     static navigationOptions = {
         header: null,
         headerBackTitle: null,
@@ -44,11 +50,18 @@ export default class WorkerSignup extends Component {
 		this.state = {
 
             showIndicator: false,
+
             user_name: '',
-            password: '',
-            advocate_userid: '',
-            confim_password: '',
+            full_name: '',
+            tags: '',
+            user_location: '',
+            web_page: '',
+            email: '',
+            phone_number: '',
             userCode: '',
+            password: '',
+            confim_password: '',
+            father: 'No',
 
             update_account: Global.update_account
 
@@ -70,18 +83,36 @@ export default class WorkerSignup extends Component {
         if(this.state.update_account) {
             this.setState({
                 user_name: Global.user_name,
+                father: Global.father,
                 password: Global.password,
                 userCode: Global.userCode,
-                advocate_userid: Global.advocate_userid
+                email: Global.email,
+                user_location: Global.paarea,
+                web_page: Global.padesc,
+                full_name: Global.paname,
+                phone_number: Global.phone,
+                tags: Global.paorg
             });
         }
     }
 
     signup = async() => {
+        Keyboard.dismiss();
         if(this.state.user_name == "") {
             Alert.alert("Warning!", "Please input Username.");
             return;
         } 
+        if(this.state.full_name == "") {
+            Alert.alert("Warning!", "Please input Full Name.");
+            return;
+        } 
+        if(this.state.email != '') {
+            let regExpression = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+            if(regExpression.test(this.state.email) === false) {
+                Alert.alert("Warning!", 'Please use valid Email address.');
+                return;
+            };
+        }
         if(this.state.userCode.length != 4) {
             Alert.alert("Warning!", "User code have to be 4 digits");
             return;
@@ -94,9 +125,6 @@ export default class WorkerSignup extends Component {
             Alert.alert("Warning!", "Password does not match.");
             return;
         }
-
-        Keyboard.dismiss();
-
         if(this.state.update_account) {
             this.setState({showIndicator: true})
             await fetch(Global.base_url + '/signup/' + Global.signup_id, {
@@ -107,9 +135,15 @@ export default class WorkerSignup extends Component {
                 },
                 body: JSON.stringify({
                     userName: this.state.user_name,
-                    father: this.state.advocate_userid,
+                    father: this.state.father,
                     password: this.state.password,
                     userCode: this.state.userCode,
+                    email: this.state.email,
+                    paarea: this.state.user_location,
+                    padesc: this.state.web_page,
+                    paname: this.state.full_name,
+                    phone: this.state.phone_number,
+                    paorg: this.state.tags,
                     id: Global.signup_id
                 })
             })
@@ -159,10 +193,15 @@ export default class WorkerSignup extends Component {
                 },
                 body: JSON.stringify({
                     userName: this.state.user_name,
-                    father: this.state.advocate_userid,
+                    father: this.state.father,
                     password: this.state.password,
                     userCode: this.state.userCode,
-                    id: 0
+                    email: this.state.email,
+                    paarea: this.state.user_location,
+                    padesc: this.state.web_page,
+                    paname: this.state.full_name,
+                    phone: this.state.phone_number,
+                    paorg: this.state.tags
                 })
             })
             .then(response => {
@@ -206,7 +245,6 @@ export default class WorkerSignup extends Component {
 
     render() {
         return (
-            <KeyboardAwareScrollView style = {{flex: 1}}>
             <View style = {styles.container}>
             {
                 this.state.showIndicator &&
@@ -226,9 +264,9 @@ export default class WorkerSignup extends Component {
                     <Image style = {{width: '60%', height: '60%'}} resizeMode = {'contain'} source={require('../assets/images/logo.png')}/>
                 </View>
                 <View style = {styles.medium_view}>
-                        {/* <View style = {styles.input_view}>
-                            <TextInput style = {styles.input_text} placeholder = {'Email'} autoCapitalize={false} onChangeText = {(text) => this.setState({email: text})}>{this.state.email}</TextInput>
-                        </View> */}
+                <KeyboardAwareScrollView style = {{width: '100%'}} showsVerticalScrollIndicator = {false}>
+                    <View style = {{width: '100%', alignItems: 'center'}}>
+                    
                         <View style = {styles.input_view}>
                         {
                             this.state.update_account &&
@@ -240,10 +278,25 @@ export default class WorkerSignup extends Component {
                         }
                         </View>
                         <View style = {styles.input_view}>
-                            <TextInput style = {styles.input_text} placeholder = {'Advocate User ID'} autoCapitalize={false} onChangeText = {(text) => this.setState({advocate_userid: text})}>{this.state.advocate_userid}</TextInput>
+                            <TextInput style = {styles.input_text} placeholder = {'Full Name'} autoCapitalize={false} onChangeText = {(text) => this.setState({full_name: text})}>{this.state.full_name}</TextInput>
                         </View>
                         <View style = {styles.input_view}>
-                            <TextInput style = {styles.input_text} placeholder = {'4 digit code'} keyboardType = {'number-pad'} onChangeText = {(text) => this.setState({userCode: text})}>{this.state.userCode}</TextInput>
+                            <TextInput style = {styles.input_text} placeholder = {'Tags(Ex: nurse,billing,beside,geriatric,etc)'} keyboardType = {'number-pad'} autoCapitalize={false}  onChangeText = {(text) => this.setState({tags: text})}>{this.state.tags}</TextInput>
+                        </View>
+                        <View style = {styles.input_view}>
+                            <TextInput style = {styles.input_text} placeholder = {'Locations'} autoCapitalize={false} onChangeText = {(text) => this.setState({user_location: text})}>{this.state.user_location}</TextInput>
+                        </View>
+                        <View style = {styles.input_view}>
+                            <TextInput style = {styles.input_text} placeholder = {'Web Page'} autoCapitalize={false} onChangeText = {(text) => this.setState({web_page: text})}>{this.state.web_page}</TextInput>
+                        </View>
+                        <View style = {styles.input_view}>
+                            <TextInput style = {styles.input_text} placeholder = {'Email Address'} autoCapitalize={false} onChangeText = {(text) => this.setState({email: text})}>{this.state.email}</TextInput>
+                        </View>
+                        <View style = {styles.input_view}>
+                            <TextInput style = {styles.input_text} placeholder = {'Phone numbers'} keyboardType = {'number-pad'} onChangeText = {(text) => this.setState({phone_number: text})}>{this.state.phone_number}</TextInput>
+                        </View>
+                        <View style = {styles.input_view}>
+                            <TextInput style = {styles.input_text} placeholder = {'4digit code*'} autoCapitalize={false} onChangeText = {(text) => this.setState({userCode: text})}>{this.state.userCode}</TextInput>
                         </View>
                         <View style = {styles.input_view}>
                             <TextInput style = {styles.input_text} placeholder = {'Password'} secureTextEntry = {true} onChangeText = {(text) => this.setState({password: text})}>{this.state.password}</TextInput>
@@ -251,29 +304,64 @@ export default class WorkerSignup extends Component {
                         <View style = {styles.input_view}>
                             <TextInput style = {styles.input_text} placeholder = {'Confirm Password'} secureTextEntry = {true} onChangeText = {(text) => this.setState({confim_password: text})}>{this.state.confim_password}</TextInput>
                         </View>
-                   
-                    <TouchableOpacity style = {styles.button_view} onPress = {() => this.signup()}>
-                        <Text style = {styles.button_text}>{this.state.update_account ? "UPDATE ACCOUNT" : "CREATE E-PATIENT ACCOUNT"}</Text>
-                    </TouchableOpacity>
-                {
-                    !this.state.update_account &&
-                    <TouchableOpacity style = {{marginTop: 30, marginBottom: 30}} onPress = {() => this.props.navigation.navigate("Login")}>
-                        <Text style = {styles.common_text}>Already a member? Login</Text>
-                    </TouchableOpacity>
-                }
-   
+                        <View style = {[styles.input_view, {flexDirection: 'row'}]}>
+                            <View style = {{width: '30%', height: '100%', justifyContent: 'center'}}>
+                                <Text style = {{fontSize: 16, color: '#000000',}}>BCPA</Text>
+                            </View>
+                            <View style = {{width: '70%', height: '100%', justifyContent: 'center'}}>
+                            {
+                                this.state.father == "YES" &&
+                                <RadioForm
+                                    radio_props={radio_props}
+                                    initial={0}
+                                    formHorizontal={true}
+                                    labelHorizontal={true}
+                                    buttonSize={15}
+                                    buttonColor={'#ff954c'}
+                                    selectedButtonColor = {'#ff954c'}
+                                    labelStyle = {{fontSize: 14, color: '#000000', marginRight: 5}}
+                                    animation={true}
+                                    onPress={(value) => {this.setState({father: value})}}
+                                />
+                            }
+                            {
+                                this.state.father != "YES" &&
+                                <RadioForm
+                                    radio_props={radio_props}
+                                    initial={1}
+                                    formHorizontal={true}
+                                    labelHorizontal={true}
+                                    buttonSize={15}
+                                    buttonColor={'#ff954c'}
+                                    selectedButtonColor = {'#ff954c'}
+                                    labelStyle = {{fontSize: 14, color: '#000000', marginRight: 5}}
+                                    animation={true}
+                                    onPress={(value) => {this.setState({father: value})}}
+                                />
+                            }  
+                            </View>
+                        </View>
+                        <TouchableOpacity style = {styles.button_view} onPress = {() => this.signup()}>
+                            <Text style = {styles.button_text}>{this.state.update_account ? "UPDATE ACCOUNT" : "CREATE ADVOCATE ACCOUNT"}</Text>
+                        </TouchableOpacity>
+                    {
+                        !this.state.update_account &&
+                        <TouchableOpacity style = {{marginTop: 20, marginBottom: 30}} onPress = {() => this.props.navigation.navigate("Login")}>
+                            <Text style = {styles.common_text}>Already a member? Login</Text>
+                        </TouchableOpacity>
+                    }
+                    </View>
+                    </KeyboardAwareScrollView>
                 </View>
-                
+                    
             </View>
-            </KeyboardAwareScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: deviceWidth,
-        height: deviceHeight,
+        flex: 1,
         backgroundColor: '#ffffff',
         alignItems: 'center'
     },
@@ -285,6 +373,7 @@ const styles = StyleSheet.create({
     },
     medium_view: {
         width: '90%',
+        height: '80%',
         alignItems: 'center'
     },
     input_view: {

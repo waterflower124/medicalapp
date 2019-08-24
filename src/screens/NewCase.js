@@ -183,7 +183,7 @@ export default class NewCase extends Component {
                             <Text style = {styles.component_title_text}>Select Body Part</Text>
                         </View>
                         <View style = {[styles.component_content_view, {flexDirection: 'row'}]}>
-                            <View style = {{width: '90%', alignItems: 'center'}}>
+                            <View style = {{width: '90%', justifyContent: 'center'}}>
                             {
                                 this.state.selected_body_part != null &&
                                 <Text style = {styles.component_content_text}>{this.state.selected_body_part.partName}</Text>
