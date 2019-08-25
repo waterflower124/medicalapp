@@ -78,7 +78,7 @@ export default class PendingVisit extends Component {
             })
         }
         this.setState({showIndicator: true});
-        await fetch(Global.base_url + '/visitproxy?userName=' + Global.user_name + '&caseNumber=' + this.state.caseNumber + '&visitStatus=' + visitStatus, {
+        await fetch(Global.base_url + '/visitproxy?userName=' + Global.profile_user_name + '&caseNumber=' + this.state.caseNumber + '&visitStatus=' + visitStatus, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
@@ -335,7 +335,7 @@ export default class PendingVisit extends Component {
             specialty: "",
             successRate: 0,
             symptoms: [],
-            userName: Global.user_name,
+            userName: Global.profile_user_name,
             visitDate: "",
             visitStatus: "V",
             visitType: "",
@@ -382,7 +382,7 @@ export default class PendingVisit extends Component {
             specialty: "",
             successRate: 0,
             symptoms: [],
-            userName: Global.user_name,
+            userName: Global.profile_user_name,
             visitDate: "",
             visitStatus: "V",
             visitType: "",

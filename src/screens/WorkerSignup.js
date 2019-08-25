@@ -69,7 +69,7 @@ export default class WorkerSignup extends Component {
     initialization() {
         if(this.state.update_account) {
             this.setState({
-                user_name: Global.user_name,
+                user_name: Global.profile_user_name,
                 password: Global.password,
                 userCode: Global.userCode,
                 advocate_userid: Global.advocate_userid

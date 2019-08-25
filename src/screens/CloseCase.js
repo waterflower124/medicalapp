@@ -53,7 +53,7 @@ export default class CloseCase extends Component {
 
     async UNSAFE_componentWillMount() {
         this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/medcase?userName=' + Global.user_name + '&type=C', {
+        await fetch(Global.base_url + '/medcase?userName=' + Global.profile_user_name + '&type=C', {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)

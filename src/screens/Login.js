@@ -87,26 +87,22 @@ export default class Login extends Component {
             if(data.error == "Unauthorized") {
                 Alert.alert('Warning!', "Username or Password is incorrect");
             } else {
+                Global.profile_user_name = this.state.user_name;
                 Global.user_name = this.state.user_name;
                 Global.password = this.state.password;
                 Global.userCode = data.userCode;
+                Global.mother = data.mother;
                 Global.advocate_userid = data.father;
                 Global.signup_id = data.id;
-                if(data.paname) {
-                    Global.father = data.father;
-                    Global.email = data.email;
-                    Global.paarea = data.paarea;
-                    Global.padesc = data.padesc;
-                    Global.paname = data.paname;
-                    Global.phone = data.phone;
-                    Global.paorg = data.paorg;
 
-                    Global.user_type = "advocate";
-                } else {
-                    Global.mother = data.mother;
+                Global.father = data.father;
+                Global.email = data.email;
+                Global.paarea = data.paarea;
+                Global.padesc = data.padesc;
+                Global.paname = data.paname;
+                Global.phone = data.phone;
+                Global.paorg = data.paorg;
 
-                    Global.user_type = "e-patient";
-                }
                 try {
                     await AsyncStorage.setItem("signin_status", "ok");
                     await AsyncStorage.setItem("user_name", this.state.user_name);
@@ -114,7 +110,14 @@ export default class Login extends Component {
                 } catch(error) {
                     // console.warn(error.message);
                 }
-                this.props.navigation.navigate("Home");
+
+                if(data.paname != "") {
+                    Global.user_type = "advocate";
+                    this.props.navigation.navigate("AdvocateHome");
+                } else {
+                    Global.user_type = "e-patient";
+                    this.props.navigation.navigate("Home");
+                }
             }
         })
         .catch(function(error) {

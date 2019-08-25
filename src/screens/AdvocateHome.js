@@ -55,10 +55,7 @@ export default class Home extends Component {
 
             side_menu_show: false,
 
-            coord_x: new Animated.Value(0),
-
-            current_user_name: '',
-            profile_user_name: '',
+            coord_x: new Animated.Value(0)
         }
         
     }
@@ -74,14 +71,10 @@ export default class Home extends Component {
  
     init_dashboard = async() => {
         this.setState({
-            current_user_name: Global.user_name,
-            profile_user_name: Global.profile_user_name,
-        })
-        this.setState({
             show_rightmenu: false
         })
         this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/dash/' + Global.profile_user_name, {
+        await fetch(Global.base_url + '/signup/adv/' + Global.user_name, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
@@ -89,49 +82,8 @@ export default class Home extends Component {
         })
         .then(response => response.json())
         .then(async data => {
-            var item_array = [];
-            for(i = 0; i < data.length; i ++) {
-                if(data[i].position != 10) {
-                    item_array.push(data[i]);
-                } else {
-                    this.setState({
-                        final_score: data[i].cantidad
-                    })
-                    if(data[i].cantidad > 725) {
-                        this.setState({
-                            header_url: require('../assets/images/score725.png'),
-                            header_text: 'Excellent'
-                        })
-                    } else if(data[i].cantidad > 675) {
-                        this.setState({
-                            header_url: require('../assets/images/score675.png'),
-                            header_text: 'Good'
-                        })
-                    } else if(data[i].cantidad > 625) {
-                        this.setState({
-                            header_url: require('../assets/images/score625.png'),
-                            header_text: 'Fair'
-                        })
-                    } else if(data[i].cantidad > 525) {
-                        this.setState({
-                            header_url: require('../assets/images/score525.png'),
-                            header_text: 'Bad'
-                        })
-                    } else if(data[i].cantidad > 425) {
-                        this.setState({
-                            header_url: require('../assets/images/score425.png'),
-                            header_text: 'Too Bad'
-                        })
-                    } else {
-                        this.setState({
-                            header_url: require('../assets/images/score0.png'),
-                            header_text: 'None'
-                        })
-                    }
-                }
-            }
             this.setState({
-                item_array: item_array
+                item_array: data
             })
         })
         .catch(function(error) {
@@ -140,17 +92,13 @@ export default class Home extends Component {
         this.setState({showIndicator: false})
     }
 
-    go_detail_screen = (item_title) => {
-        this.props.navigation.navigate("ScoreFactors");
-    }
-
     my_account() {
         Global.update_account = true;
-        // if(Global.user_type == "advocate") {
-        //     this.props.navigation.navigate("AdvocateSignup");
-        // } else {
+        if(Global.user_type == "advocate") {
+            this.props.navigation.navigate("AdvocateSignup");
+        } else {
             this.props.navigation.navigate("WorkerSignup");
-        // }
+        }
     }
 
     contactus() {
@@ -283,70 +231,6 @@ export default class Home extends Component {
             {text: 'OK', onPress: null}
         ],
         { cancelable: true })
-    }
-
-    exit_profile = async() => {
-        this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/login', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
-            }
-        })
-        .then(response => response.json())
-        .then(async data => {
-            if(data.error == "Unauthorized") {
-                Alert.alert('Warning!', "Username or Password is incorrect");
-            } else {
-
-
-                Global.profile_user_name = data.userName;
-                Global.userCode = data.userCode;
-                Global.mother = data.mother;
-                Global.advocate_userid = data.father;
-
-                Global.father = data.father;
-                Global.email = data.email;
-                Global.paarea = data.paarea;
-                Global.padesc = data.padesc;
-                Global.paname = data.paname;
-                Global.phone = data.phone;
-                Global.paorg = data.paorg;
-                this.props.navigation.navigate("AdvocateHome");
-            }
-        })
-        .catch(function(error) {
-            Alert.alert('Warning!', "Network error.");
-        });
-        this.setState({showIndicator: false})
-    }
-
-    right_menu_view_style () {
-        if(this.state.current_user_name == this.state.profile_user_name) {
-            return {
-                width: 200,
-                height: 200,
-                position: 'absolute',
-                top: menu_bar_height + topOffset,
-                right: 5,
-                backgroundColor: '#fafafa',
-                zIndex: 10,
-                borderColor: '#808080',
-                borderWidth: 1
-            }
-        } else {
-            return {
-                width: 200,
-                height: 250,
-                position: 'absolute',
-                top: menu_bar_height + topOffset,
-                right: 5,
-                backgroundColor: '#fafafa',
-                zIndex: 10,
-                borderColor: '#808080',
-                borderWidth: 1
-            }
-        }
     }
 
     render() {
@@ -526,7 +410,7 @@ export default class Home extends Component {
         }
         {
             this.state.show_rightmenu &&
-            <View style = {this.right_menu_view_style()}>
+            <View style = {styles.right_menu_view}>
                 <TouchableOpacity style = {styles.menu_item_view} onPress = {() => this.my_account()}>
                     <Text style = {styles.menu_text}>My Account</Text>
                 </TouchableOpacity>
@@ -536,12 +420,6 @@ export default class Home extends Component {
                 <TouchableOpacity style = {styles.menu_item_view} onPress = {() => this.terms_show()}>
                     <Text style = {styles.menu_text}>Disclaimer</Text>
                 </TouchableOpacity>
-            {
-                this.state.current_user_name != this.state.profile_user_name &&
-                <TouchableOpacity style = {styles.menu_item_view} onPress = {() => this.exit_profile()}>
-                    <Text style = {styles.menu_text}>Exit Profile</Text>
-                </TouchableOpacity>
-            }
                 <TouchableOpacity style = {styles.menu_item_view} onPress = {() => this.logout()}>
                     <Text style = {styles.menu_text}>Log out</Text>
                 </TouchableOpacity>
@@ -550,121 +428,48 @@ export default class Home extends Component {
             <View style = {{width: '100%', height: top_view_height, alignItems: 'center', padding: 5}}>
                 <View style = {{width: '100%', height: '100%', flexDirection: 'row', backgroundColor: '#ffffff', borderColor: '#c0c0c0', borderWidth: 1}}>
                     <View style = {{width: '40%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                        <Image style = {{height: '80%', aspectRatio: 1}} resizeMode = {'contain'} source={this.state.header_url}/>
+                        <Image style = {{height: '80%', aspectRatio: 1}} resizeMode = {'contain'} source={require('../assets/images/score725.png')}/>
                     </View>
                     <View style = {{width: '40%', height: '100%', justifyContent: 'center'}}>
-                        <Text style = {{fontSize: 16, color: '#ff0000', marginBottom: 5}}>{this.state.header_text}</Text>
+                        <Text style = {{fontSize: 16, color: '#ff0000', marginBottom: 5}}>Advocate</Text>
                         <Text style = {{fontSize: 14, fontWeight: 'bold', color: '#000000', marginBottom: 5}}>e-Patient Index</Text>
-                        <Text style = {{fontSize: 12, color: '#ff0000'}}>Lock at your Records</Text>
+                        <Text style = {{fontSize: 12, color: '#ff0000'}}>Lock at your Patient records</Text>
                     </View>
                     <View style = {{width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                        <Text style = {{fontSize: 24, fontWeight: 'bold', color: '#3aa1f4'}}>{this.state.final_score}</Text>
+                        {/* <Text style = {{fontSize: 24, fontWeight: 'bold', color: '#3aa1f4'}}>{this.state.final_score}</Text> */}
                     </View>
                 </View>
             </View>
-        {
-            this.state.item_array.length != 0 &&
             <View style = {{width: '100%', height: group_view_height, alignItems: 'center', justifyContent: 'center'}}>
                 <View style = {{width: deviceWidth * 0.9, height: deviceWidth * 0.9, justifyContent: 'space-between'}}>
                     <View style = {{width: '100%', height: '30%', justifyContent: 'space-between', flexDirection: 'row'}}>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("OpenCase")}>
+                    <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("MyPatient", {patient_list: this.state.item_array})}>
                         {
-                            this.state.item_array[0].cantidad != 0 &&
+                            this.state.item_array.length != 0 &&
                             <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[0].cantidad}</Text>
+                                <Text style = {styles.badge_text}>{this.state.item_array.length}</Text>
                             </View>
                         }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_open.png')}/>
-                            <Text style = {styles.item_text}>Open Cases</Text>
+                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_heart.png')}/>
+                            <Text style = {styles.item_text}>My Patients</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("CloseCase")}>
-                        {
-                            this.state.item_array[1].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[1].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_close.png')}/>
-                            <Text style = {styles.item_text}>Close Cases</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("ScoreFactors")}>
-                        {
-                            this.state.item_array[2].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[2].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_board.png')}/>
-                            <Text style = {styles.item_text}>Score Factors</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style = {{width: '100%', height: '30%', justifyContent: 'space-between', flexDirection: 'row'}}>
                         <TouchableOpacity style = {styles.item_style} onPress = {() => this.chat_function()}>
-                        {
-                            this.state.item_array[3].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[3].cantidad}</Text>
-                            </View>
-                        }
                             <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_chat.png')}/>
                             <Text style = {styles.item_text}>Chat</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Advice")}>
-                        {
-                            this.state.item_array[4].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[4].cantidad}</Text>
-                            </View>
-                        }
                             <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_advice.png')}/>
                             <Text style = {styles.item_text}>Advice</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("PendingLabs")}>
-                        {
-                            this.state.item_array[5].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[5].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_pendingwork.png')}/>
-                            <Text style = {styles.item_text}>Pending Labs</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style = {{width: '100%', height: '30%', justifyContent: 'space-between', flexDirection: 'row'}}>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("PendingVisit", {prev_screen: "Home", caseNumber: -1})}>
-                        {
-                            this.state.item_array[6].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[6].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_pendingvisit.png')}/>
-                            <Text style = {styles.item_text}>Pending Visits</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Diagnosis")}>
-                        {
-                            this.state.item_array[7].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[7].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_heart.png')}/>
-                            <Text style = {styles.item_text}>Diagnosis</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Advocate")}>
-                        {
-                            this.state.item_array[8].cantidad != 0 &&
-                            <View style = {styles.badge_view}>
-                                <Text style = {styles.badge_text}>{this.state.item_array[8].cantidad}</Text>
-                            </View>
-                        }
-                            <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_group.png')}/>
-                            <Text style = {styles.item_text}>Advocate</Text>
-                        </TouchableOpacity>
+                        
+                    </View>
+                    <View style = {{width: '100%', height: '30%', justifyContent: 'space-between', flexDirection: 'row'}}>
+                        
                     </View>
                 </View>
             </View>
-        }
         </SafeAreaView>
         );
     }
@@ -716,7 +521,7 @@ const styles = StyleSheet.create({
     },
     right_menu_view: {
         width: 200,
-        height: 250,
+        height: 200,
         position: 'absolute',
         top: menu_bar_height + topOffset,
         right: 5,

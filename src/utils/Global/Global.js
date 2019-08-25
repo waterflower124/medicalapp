@@ -6,6 +6,7 @@ export default {
 
     user_type: '',
 
+    profile_user_name: '',
     user_name: '',
     password: '',
     userCode: '',

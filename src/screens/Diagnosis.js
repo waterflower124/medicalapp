@@ -48,7 +48,7 @@ export default class Diagnosis extends Component {
 
     async UNSAFE_componentWillMount() {
         this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/maindiag?userName=' + Global.user_name, {
+        await fetch(Global.base_url + '/maindiag?userName=' + Global.profile_user_name, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)

@@ -71,27 +71,29 @@ export default class Splash extends Component {
                             Alert.alert('Warning!', "Username or Password is incorrect");
                             this.props.navigation.navigate("Login");
                         } else {
+                            Global.profile_user_name = user_name;
                             Global.user_name = user_name;
                             Global.password = password;
                             Global.userCode = data.userCode;
+                            Global.mother = data.mother;
                             Global.advocate_userid = data.father;
                             Global.signup_id = data.id;
-                            if(data.paname) {
-                                Global.father = data.father;
-                                Global.email = data.email;
-                                Global.paarea = data.paarea;
-                                Global.padesc = data.padesc;
-                                Global.paname = data.paname;
-                                Global.phone = data.phone;
-                                Global.paorg = data.paorg;
+                            
+                            Global.father = data.father;
+                            Global.email = data.email;
+                            Global.paarea = data.paarea;
+                            Global.padesc = data.padesc;
+                            Global.paname = data.paname;
+                            Global.phone = data.phone;
+                            Global.paorg = data.paorg;
 
+                            if(data.paname != "") {
                                 Global.user_type = "advocate";
+                                this.props.navigation.navigate("AdvocateHome");
                             } else {
-                                Global.mother = data.mother;
-
                                 Global.user_type = "e-patient";
+                                this.props.navigation.navigate("Home");
                             }
-                            this.props.navigation.navigate("Home");
                         }
                     })
                     .catch(function(error) {

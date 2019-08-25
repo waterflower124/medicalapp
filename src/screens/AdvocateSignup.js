@@ -256,7 +256,7 @@ export default class AdvocateSignup extends Component {
             }
             {
                 this.state.update_account &&
-                <TouchableOpacity style = {styles.back_button} onPress = {() => this.props.navigation.navigate("Home")}>
+                <TouchableOpacity style = {styles.back_button} onPress = {() => this.props.navigation.navigate("AdvocateHome")}>
                     <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../assets/images/menu_back_arrow_black.png')}/>
                 </TouchableOpacity>
             }

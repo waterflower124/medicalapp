@@ -60,7 +60,7 @@ export default class OpenCase extends Component {
 
     init_opencase = async() => {
         this.setState({showIndicator: true});
-        await fetch(Global.base_url + '/medcase?userName=' + Global.user_name + '&type=A', {
+        await fetch(Global.base_url + '/medcase?userName=' + Global.profile_user_name + '&type=A', {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)

@@ -110,7 +110,7 @@ export default class Advocate extends Component {
 
     set_advocate = async(item) => {
         this.hidden_right_menu();
-        item.father = "";
+        item.father = Global.user_name;
         this.setState({showIndicator: true});
         await fetch(Global.base_url + 'signup/adv/' + item.id, {
             method: 'PUT',
@@ -121,8 +121,8 @@ export default class Advocate extends Component {
         })
         .then(response => response.json())
         .then(async data => {
-            console.warn(data)
-            var json_array = data;
+            
+            var json_array = this.state.json_array;
             for(i = 0; i < json_array.length; i ++) {
                 json_array[i]["clicked"] = false;
             }
@@ -235,7 +235,7 @@ export default class Advocate extends Component {
                                     <View style = {styles.item_content_view}>
                                         <RadioForm
                                             radio_props={radio_props}
-                                            initial={item.father == "Yes" ? 0 : 1}
+                                            initial={item.father == "YES" ? 0 : 1}
                                             formHorizontal={true}
                                             labelHorizontal={true}
                                             buttonSize={15}
@@ -257,7 +257,7 @@ export default class Advocate extends Component {
                                 item.clicked &&
                                 <View style = {[styles.right_menu_view, {zIndex: 1000-index}]}>
                                     <TouchableOpacity style = {styles.right_menu_item} onPress = {() => this.set_advocate(item)}>
-                                        <Text style = {styles.right_menu_text}>Set as ny advocate</Text>
+                                        <Text style = {styles.right_menu_text}>Set as my advocate</Text>
                                     </TouchableOpacity>
                                 </View>
                             }

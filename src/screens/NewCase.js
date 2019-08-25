@@ -86,7 +86,7 @@ export default class NewCase extends Component {
             "pampIndex": 0,
             "partName": this.state.selected_body_part.partName,
             "specialty": "",
-            "userName": Global.user_name
+            "userName": Global.profile_user_name
         }
         this.setState({showIndicator: true})
         await fetch(Global.base_url + '/medcase', {

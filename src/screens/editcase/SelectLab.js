@@ -82,7 +82,7 @@ export default class SelectLab extends Component {
             this.props.navigation.navigate("LabTests");
         } else if(this.state.prev_screen == "RequiredLabs") {
             item.labStatus = "O";
-            item.userName = Global.user_name;
+            item.userName = Global.profile_user_name;
             item.visitNumber = 0;
             Global.icd_admin_json.labs.push(item);
             this.props.navigation.navigate("RequiredLabs");
@@ -93,7 +93,7 @@ export default class SelectLab extends Component {
             Global.lab_admin_json.labCode = item.labCode;
             Global.lab_admin_json.labDesc = item.labDesc;
             Global.lab_admin_json.loincCode = item.loincCode;
-            Global.lab_admin_json.userName = Global.user_name;
+            Global.lab_admin_json.userName = Global.profile_user_name;
 
             this.props.navigation.navigate("LabMaster");
         } 
