@@ -1,0 +1,47 @@
+dependencies: \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.m \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Target\ Support\ Files/React-RCTAnimation/React-RCTAnimation-prefix.pch \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTBridgeModule.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTDefines.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTUIManager.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTBridge.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTBridgeDelegate.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTJavaScriptLoader.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTFrameUpdate.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTInvalidating.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTRootView.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTViewManager.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTConvert.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTAnimationType.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTBorderStyle.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTLog.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTAssert.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTUtils.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTPointerEvents.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTTextDecorationLineType.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Private/yoga/Yoga.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Private/yoga/YGEnums.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Private/yoga/YGMacros.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Private/yoga/YGValue.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTEventDispatcher.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/UIView+React.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/ios/Pods/Headers/Public/React-Core/React/RCTComponent.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAdditionAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDiffClampAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDivisionAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTEventAnimation.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTFrameAnimation.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTDecayAnimation.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTInterpolationAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTModuloAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTMultiplicationAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTPropsAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTSpringAnimation.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTStyleAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTSubtractionAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h \
+  /Volumes/DataDrive/Project/2019/7.20_usa_rn/demo/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTrackingAnimatedNode.h

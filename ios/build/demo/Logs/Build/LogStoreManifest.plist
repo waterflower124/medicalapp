@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>222419CA-397E-4B79-AC83-653AFA103E93</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>222419CA-397E-4B79-AC83-653AFA103E93.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>demo project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>demo</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building workspace demo with scheme demo and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>588389761.43892503</real>
+			<key>timeStoppedRecording</key>
+			<real>588389782.15894604</real>
+			<key>title</key>
+			<string>Building workspace demo with scheme demo and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>222419CA-397E-4B79-AC83-653AFA103E93</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
