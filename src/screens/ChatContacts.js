@@ -66,7 +66,7 @@ export default class ScoreFacotrs extends Component {
 
     init_contacts = async() => {
         this.setState({showIndicator: true})
-        await fetch(Global.base_url + '/diagnose/admin', {
+        await fetch(Global.base_url + '/diagnose/' + Global.user_name, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(Global.user_name + ":" + Global.password)
