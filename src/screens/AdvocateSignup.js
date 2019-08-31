@@ -214,26 +214,31 @@ export default class AdvocateSignup extends Component {
                     return {'error': 0};
                 }
             })
-            .then(data=> {
+            .then(async data => {
                 if(data.error == 406) {
                     Alert.alert("Warning!", "Username already exist. Please try again with another Username");
                 } else if(data.error == 0) {
                     Alert.alert("Warning!", "There's some problem in server. Please try again later");
                 } else {
-                    var alert_message = "";
-                    if(this.state.update_account) {
-                        alert_message = "Your account is updated successfully";
-                    } else {
-                        alert_message = "Your account is created successfully";
-                    }
-                    Alert.alert("Success", alert_message,
-                    [
-                        {text: 'Cancel', onPress: null},
-                        {text: 'OK', onPress: async() => {
-                            this.props.navigation.navigate("Login");
-                        }}
-                    ],
-                    { cancelable: true })
+                    await firebaseApp.database().ref("users/" + this.state.user_name).set({name: this.state.user_name})
+                    .then(async() => {
+                        var alert_message = "";
+                        if(this.state.update_account) {
+                            alert_message = "Your account is updated successfully";
+                        } else {
+                            alert_message = "Your account is created successfully";
+                        }
+                        Alert.alert("Success", alert_message,
+                        [
+                            {text: 'Cancel', onPress: null},
+                            {text: 'OK', onPress: async() => {
+                                this.props.navigation.navigate("Login");
+                            }}
+                        ],
+                        { cancelable: true })
+                    }).catch((error) => {
+                        Alert.alert('Warning!', "Network error!");
+                    })
                 }
             })
             .catch(function(error) {

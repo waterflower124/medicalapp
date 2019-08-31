@@ -226,11 +226,12 @@ export default class Home extends Component {
     }
 
     chat_function() {
-        Alert.alert("EpatientIndex", "You can't use chat function. Please contact us.",
-        [
-            {text: 'OK', onPress: null}
-        ],
-        { cancelable: true })
+        // Alert.alert("EpatientIndex", "You can't use chat function. Please contact us.",
+        // [
+        //     {text: 'OK', onPress: null}
+        // ],
+        // { cancelable: true });
+        this.props.navigation.navigate("ChatContacts", {prev_screen: 'advocate'});
     }
 
     render() {
@@ -457,7 +458,7 @@ export default class Home extends Component {
                             <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_chat.png')}/>
                             <Text style = {styles.item_text}>Chat</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Advice")}>
+                        <TouchableOpacity style = {styles.item_style} onPress = {() => this.props.navigation.navigate("Advice", {prev_screen: 'advocate'})}>
                             <Image style = {styles.item_icon} resizeMode = {'contain'} source={require('../assets/images/main_advice.png')}/>
                             <Text style = {styles.item_text}>Advice</Text>
                         </TouchableOpacity>

@@ -43,7 +43,8 @@ export default class Advice extends Component {
             showIndicator: false,
 
             header_array: [],
-            content_array: []
+            content_array: [],
+            prev_screen: props.navigation.state.params.prev_screen,
 		}
     }
 
@@ -104,6 +105,14 @@ export default class Advice extends Component {
             })
     }
 
+    go_home() {
+        if(this.state.prev_screen == "patient") {
+            this.props.navigation.navigate("Home");
+        } else {
+            this.props.navigation.navigate("AdvocateHome");
+        }
+    }
+
     render() {
         if(this.state.showIndicator)
         {
@@ -119,7 +128,7 @@ export default class Advice extends Component {
         <SafeAreaView style = {styles.container}>
             <View style = {styles.menu_bar}>
                 <View style = {{width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity onPress = {() => this.props.navigation.navigate("Home")}>
+                    <TouchableOpacity onPress = {() => this.go_home()}>
                         <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../assets/images/menu_back_arrow.png')}/>
                     </TouchableOpacity>
                 </View>
@@ -127,7 +136,7 @@ export default class Advice extends Component {
                     <Text style = {{fontSize: 18, color: '#ffffff'}}>Advice</Text>
                 </View>
                 <View style = {{width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity onPress = {() => this.props.navigation.navigate("Home")}>
+                    <TouchableOpacity onPress = {() => this.go_home()}>
                         <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../assets/images/right_home.png')}/>
                     </TouchableOpacity>
                 </View>

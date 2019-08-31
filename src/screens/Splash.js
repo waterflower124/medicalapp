@@ -16,6 +16,7 @@ import Global from '../utils/Global/Global';
 import AsyncStorage from '@react-native-community/async-storage';
 import { SkypeIndicator } from 'react-native-indicators';
 const base64 = require('base-64');
+import firebaseApp from "../utils/Global/firebaseConfig"
 
 var deviceWidth = Dimensions.get('window').width;
 var deviceHeight = Dimensions.get('window').height;
@@ -87,6 +88,21 @@ export default class Splash extends Component {
                             Global.phone = data.phone;
                             Global.paorg = data.paorg;
 
+                            // await firebaseApp.auth().signInAnonymously()
+                            // .then(async() => {
+                            //     Global.firebase_id = firebaseApp.auth().currentUser.uid;
+                            //     // console.warn("firebase success")
+                            // })
+                            // .catch((error) => {
+                            //     // console.warn(error)
+                            // })
+
+                            // await firebaseApp.database().ref("users/" + user_name).set({name: user_name})
+                            // .then(async() => {
+                            // }).catch((error) => {
+                            //     Alert.alert('Warning!', error.message);
+                            // })
+
                             if(data.paname != "") {
                                 Global.user_type = "advocate";
                                 this.props.navigation.navigate("AdvocateHome");
@@ -97,7 +113,7 @@ export default class Splash extends Component {
                         }
                     })
                     .catch(function(error) {
-                        Alert.alert('Warning!', "Network error!");
+                        Alert.alert('Warning!', error.message);
                         this.props.navigation.navigate("Login");
                     });
                     this.setState({showIndicator: false})
@@ -109,8 +125,6 @@ export default class Splash extends Component {
             } catch(error) {
 
             }
-            
-            
         }, 1000);
     }
 
@@ -121,7 +135,6 @@ export default class Splash extends Component {
             {text: 'OK', onPress: () => BackHandler.exitApp()},
         ],
         { cancelable: true })
-        
     }
 
     render() {
