@@ -32,10 +32,14 @@ import Global from "./src/utils/Global/Global"
 import Splash from "./src/screens/Splash"
 import Login from "./src/screens/Login"
 import Home from "./src/screens/Home"
+import AdvocateHome from "./src/screens/AdvocateHome"
+import MyPatient from "./src/screens/MyPatient"
 import WorkerSignup from "./src/screens/WorkerSignup"
 import AdvocateSignup from "./src/screens/AdvocateSignup"
 import ScoreFactors from "./src/screens/ScoreFactors"
 import Advice from "./src/screens/Advice"
+import ChatContacts from "./src/screens/ChatContacts"
+import ChatScreen from "./src/screens/ChatScreen"
 import Diagnosis from "./src/screens/Diagnosis"
 import PendingLabs from "./src/screens/PendingLabs"
 import PendingVisit from "./src/screens/PendingVisit"
@@ -87,10 +91,14 @@ const AppNavigator = createStackNavigator ({
   Splash: {screen: Splash},
   Login: {screen: Login},
   Home: {screen: Home},
+  AdvocateHome: {screen: AdvocateHome},
+  MyPatient: {screen: MyPatient},
   WorkerSignup: {screen: WorkerSignup},
   AdvocateSignup: {screen: AdvocateSignup},
   ScoreFactors: {screen: ScoreFactors},
   Advice: {screen: Advice},
+  ChatContacts: {screen: ChatContacts},
+  ChatScreen: {screen: ChatScreen},
   Diagnosis: {screen: Diagnosis},
   PendingLabs: {screen: PendingLabs},
   PendingVisit: {screen: PendingVisit},
@@ -194,7 +202,7 @@ export default class App extends Component {
             <AppNav
                 onNavigationStateChange={(prevState, currentState) => {
                     const currentScreen = getActiveRouteName(currentState);
-					if(currentScreen == 'Login' || currentScreen == 'Home') {
+					if(currentScreen == 'Login' || currentScreen == 'Home' || currentScreen == 'AdvocateHome') {
                         this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
                         
                     } else {
