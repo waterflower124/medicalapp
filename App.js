@@ -38,8 +38,9 @@ import WorkerSignup from "./src/screens/WorkerSignup"
 import AdvocateSignup from "./src/screens/AdvocateSignup"
 import ScoreFactors from "./src/screens/ScoreFactors"
 import Advice from "./src/screens/Advice"
-import ChatContacts from "./src/screens/ChatContacts"
-import ChatScreen from "./src/screens/ChatScreen"
+import ChatContacts from "./src/screens/chat/ChatContacts"
+import ChatScreen from "./src/screens/chat/ChatScreen"
+import ChatProfile from "./src/screens/chat/ChatProfile"
 import Diagnosis from "./src/screens/Diagnosis"
 import PendingLabs from "./src/screens/PendingLabs"
 import PendingVisit from "./src/screens/PendingVisit"
@@ -99,6 +100,7 @@ const AppNavigator = createStackNavigator ({
   Advice: {screen: Advice},
   ChatContacts: {screen: ChatContacts},
   ChatScreen: {screen: ChatScreen},
+  ChatProfile: {screen: ChatProfile},
   Diagnosis: {screen: Diagnosis},
   PendingLabs: {screen: PendingLabs},
   PendingVisit: {screen: PendingVisit},
