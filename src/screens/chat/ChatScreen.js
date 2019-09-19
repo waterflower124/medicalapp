@@ -20,8 +20,8 @@ import {
 import {getInset} from 'react-native-safe-area-view'
 const base64 = require('base-64');
 import { SkypeIndicator } from 'react-native-indicators';
-import Global from '../utils/Global/Global';
-import firebaseApp from "../utils/Global/firebaseConfig";
+import Global from '../../utils/Global/Global';
+import firebaseApp from "../../utils/Global/firebaseConfig";
 import firebase from "firebase";
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -50,7 +50,8 @@ export default class ScoreFacotrs extends Component {
             showIndicator: false,
 
             keyboardHeight: 0,
-            selected_disease: props.navigation.state.params.disease,
+            chat_type: props.navigation.state.params.chat_type,
+            // selected_disease: props.navigation.state.params.disease,
             message_list: [],
             text_message: '',
             text_input_height: 0,
@@ -58,17 +59,8 @@ export default class ScoreFacotrs extends Component {
     }
 
     async UNSAFE_componentWillMount() {
+       
         
-        var converted_diseasecode = this.state.selected_disease.diagnoseCode;
-        converted_diseasecode = converted_diseasecode.replace('.', '');
-        let dbRef = firebaseApp.database().ref('messages').child(converted_diseasecode);
-        await dbRef.on('child_added', (value) => {
-            let message = value.val();
-            this.setState({
-                message_list: [...this.state.message_list, message]
-            });
-            // console.warn(message.message)
-        });
     };
 
     go_back() {
@@ -77,13 +69,39 @@ export default class ScoreFacotrs extends Component {
     }
 
     componentDidMount() {
+
+        this.willFocusListener =  this.props.navigation.addListener('willFocus', this.init_chat.bind(this));
+
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
     }
 
     componentWillUnmount() {
+
+        this.willFocusListener.remove();
+
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
+    }
+
+    init_chat = async() => {
+        if(this.props.navigation.state.params.chat_type) {
+            let chat_type = this.props.navigation.state.params.chat_type;
+            if(chat_type == "group") {
+                var converted_diseasecode = props.navigation.state.params.disease;
+                converted_diseasecode = converted_diseasecode.replace('.', '');
+                let dbRef = firebaseApp.database().ref('messages/group').child(converted_diseasecode);
+                await dbRef.on('child_added', (value) => {
+                    let message = value.val();
+                    this.setState({
+                        message_list: [...this.state.message_list, message]
+                    });
+                    // console.warn(message.message)
+                });
+            } else if(chat_type == "recent") {
+                
+            }
+        }
     }
 
     _keyboardDidShow(e) {
@@ -100,22 +118,39 @@ export default class ScoreFacotrs extends Component {
 
     send_message = async() => {
         if(this.state.text_message != 0) {
-            var converted_diseasecode = this.state.selected_disease.diagnoseCode;
-            converted_diseasecode = converted_diseasecode.replace('.', '');
-            let dbRef = firebaseApp.database().ref('messages').child(converted_diseasecode).push().key;
-            let updates = {};
-            let message = {
-                message: this.state.text_message,
-                time: firebase.database.ServerValue.TIMESTAMP,
-                from: Global.user_name
-            };
-            // updates['messages/' + Global.user_name + '/' + this.state.opponent_name + '/' + dbRef] = message;
-            updates['messages/' + converted_diseasecode + '/' + dbRef] = message;
-            this.setState({
-                text_message: '',
-                text_input_height: 0
-            });
-            await firebaseApp.database().ref().update(updates);
+            if(this.state.chat_type == "group") {
+                var converted_diseasecode = this.state.selected_disease.diagnoseCode;
+                converted_diseasecode = converted_diseasecode.replace('.', '');
+                let dbRef = firebaseApp.database().ref('messages/group').child(converted_diseasecode).push().key;
+                let updates = {};
+                let message = {
+                    message: this.state.text_message,
+                    created_at: firebase.database.ServerValue.TIMESTAMP,
+                    from: Global.user_name
+                };
+                // updates['messages/' + Global.user_name + '/' + this.state.opponent_name + '/' + dbRef] = message;
+                updates['messages/group/' + converted_diseasecode + '/' + dbRef] = message;
+                this.setState({
+                    text_message: '',
+                    text_input_height: 0
+                });
+                await firebaseApp.database().ref().update(updates);
+            } else if(this.state.chat_type = "recent") {
+                let dbRef = firebaseApp.database().ref('messages/recent').child(Global.user_name).push().key;
+                let updates = {};
+                let message = {
+                    message: this.state.text_message,
+                    created_at: firebase.database.ServerValue.TIMESTAMP,
+                    from: Global.user_name
+                };
+                updates['messages/' + this.state.opponent_name + '/' + Global.user_name + '/' + dbRef] = message;
+                updates['messages/group/' + Global.user_name + '/' + dbRef] = message;
+                this.setState({
+                    text_message: '',
+                    text_input_height: 0
+                });
+                await firebaseApp.database().ref().update(updates);
+            }
         }
     }
 
@@ -131,18 +166,7 @@ export default class ScoreFacotrs extends Component {
     }
 
     render() {
-        if(this.state.showIndicator)
-        {
-            return (
-            <View style = {{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', opacity: 0.3, zIndex: 100}}>
-                <View style = {{flex: 1}}>
-                    <SkypeIndicator color = '#ffffff' />
-                </View>
-            </View>
-            )
-        }
         return (
-            
         <SafeAreaView style = {styles.container}>
         {
             this.state.showIndicator &&
@@ -155,7 +179,7 @@ export default class ScoreFacotrs extends Component {
             <View style = {styles.menu_bar}>
                 <View style = {{width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
                     <TouchableOpacity onPress = {() => this.go_back()}>
-                        <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../assets/images/menu_back_arrow.png')}/>
+                        <Image style = {{width: 20, height: 20}} resizeMode = {'contain'} source={require('../../assets/images/menu_back_arrow.png')}/>
                     </TouchableOpacity>
                 </View>
                 <View style = {{width: '70%', height: '100%', justifyContent: 'center'}}>
@@ -170,7 +194,7 @@ export default class ScoreFacotrs extends Component {
                 </View>
                 {/* <View style = {{width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
                     <TouchableOpacity onPress = {() => this.props.navigation.navigate("Home")}>
-                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../assets/images/right_home.png')}/>
+                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/right_home.png')}/>
                     </TouchableOpacity>
                 </View> */}
             </View>
@@ -186,7 +210,7 @@ export default class ScoreFacotrs extends Component {
                                 </View>
                                 <View style = {{width: '100%', flexDirection: 'row', alignSelf: 'flex-end'}}>
                                     <Text style = {styles.time_text_style}>{item.from}: </Text>
-                                    <Text style = {styles.time_text_style}>{this.convert_time(item.time)}</Text>
+                                    <Text style = {styles.time_text_style}>{this.convert_time(item.created_at)}</Text>
                                 </View>
                             </View>
                         </View>
@@ -209,7 +233,7 @@ export default class ScoreFacotrs extends Component {
                         {this.state.text_message}
                     </TextInput>
                     <TouchableOpacity style = {styles.send_icon_view} onPress = {() => this.send_message()}>
-                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../assets/images/send_message.png')}/>
+                        <Image style = {{width: 30, height: 30}} resizeMode = {'contain'} source={require('../../assets/images/send_message.png')}/>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -184,6 +184,13 @@ export default class WorkerSignup extends Component {
                 } else {
                     await firebaseApp.database().ref("users/" + this.state.user_name).set({name: this.state.user_name})
                     .then(async() => {
+
+                        firebaseApp.database().ref("users/" + this.state.user_name).update({name: this.state.user_name, avatar_url: ""})
+                        .then(async() => {
+                        }).catch((error) => {
+                            // Alert.alert('Warning!', "Network error.");
+                        })
+
                         var alert_message = "";
                         if(this.state.update_account) {
                             alert_message = "Your account is updated successfully";

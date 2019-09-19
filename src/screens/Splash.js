@@ -42,17 +42,18 @@ export default class Splash extends Component {
     }
 
     async componentDidMount() {
+        console.log("asdfghjkl");
         await fetch("https://epatientindex.herokuapp.com/version/1")
         .then(response => response.json())
         .then(async data => {
             Global.base_url = data.heroku;
+            // console.warn(data.heroku)
         })
         .catch(function(error) {
             Alert.alert('Warning!', "Netework error");
             return;
         });
         setTimeout(async() => {
-
             try {
                 let signin_status = await AsyncStorage.getItem("signin_status");
                 if(signin_status == "ok") {
@@ -88,19 +89,20 @@ export default class Splash extends Component {
                             Global.phone = data.phone;
                             Global.paorg = data.paorg;
 
-                            // await firebaseApp.auth().signInAnonymously()
-                            // .then(async() => {
-                            //     Global.firebase_id = firebaseApp.auth().currentUser.uid;
-                            //     // console.warn("firebase success")
-                            // })
-                            // .catch((error) => {
-                            //     // console.warn(error)
-                            // })
+                            await firebaseApp.auth().signInAnonymously()
+                            .then(async() => {
+                                Global.firebase_id = firebaseApp.auth().currentUser.uid;
+                                // console.warn("firebase success")
+                            })
+                            .catch((error) => {
+                                // console.warn(error)
+                            })
 
-                            // await firebaseApp.database().ref("users/" + user_name).set({name: user_name})
+
+                            // await firebaseApp.database().ref("users/" + user_name).update({name: user_name})
                             // .then(async() => {
                             // }).catch((error) => {
-                            //     Alert.alert('Warning!', error.message);
+                            //     Alert.alert('Warning!', "Network error.");
                             // })
 
                             if(data.paname != "") {
@@ -113,7 +115,7 @@ export default class Splash extends Component {
                         }
                     })
                     .catch(function(error) {
-                        Alert.alert('Warning!', error.message);
+                        Alert.alert('Warning!', "Network error.");
                         this.props.navigation.navigate("Login");
                     });
                     this.setState({showIndicator: false})
