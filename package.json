@@ -11,7 +11,7 @@
     "@react-native-community/async-storage": "^1.6.1",
     "base-64": "^0.1.0",
     "firebase": "^6.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "16.8.6",
     "react-native": "0.60.3",
     "react-native-fs": "^2.14.1",
